@@ -614,9 +614,434 @@ Act as a senior architect reviewing your own work:
 - **Have I properly analyzed alternatives and received approval?**
 - **Does the solution meet compliance and regulatory requirements?**
 
+
 ---
 
+## 14. Project Documentation & Decision Logging System
+
+### 14.1 Documentation Structure
+Every project MUST maintain a standardized documentation structure alongside the code:
+project-root/
+├── docs/
+│   ├── architecture/
+│   │   ├── decisions/
+│   │   │   ├── ADR-001-initial-architecture.md
+│   │   │   ├── ADR-002-authentication-strategy.md
+│   │   │   └── ADR-template.md
+│   │   ├── diagrams/
+│   │   │   ├── system-overview.puml
+│   │   │   ├── security-architecture.puml
+│   │   │   └── data-flow.puml
+│   │   └── README.md
+│   │
+│   ├── development/
+│   │   ├── flows/
+│   │   │   ├── user-authentication-flow.md
+│   │   │   ├── data-processing-pipeline.md
+│   │   │   └── api-request-flow.md
+│   │   ├── setup/
+│   │   │   ├── local-development.md
+│   │   │   ├── deployment-guide.md
+│   │   │   └── troubleshooting.md
+│   │   └── conventions/
+│   │       ├── coding-standards.md
+│   │       ├── git-workflow.md
+│   │       └── review-checklist.md
+│   │
+│   ├── mvp/
+│   │   ├── phase-1/
+│   │   │   ├── requirements.md
+│   │   │   ├── scope.md
+│   │   │   ├── acceptance-criteria.md
+│   │   │   └── retrospective.md
+│   │   ├── phase-2/
+│   │   │   └── ...
+│   │   └── roadmap.md
+│   │
+│   ├── tasks/
+│   │   ├── breakdown/
+│   │   │   ├── epic-001-user-management.md
+│   │   │   ├── epic-002-payment-integration.md
+│   │   │   └── task-template.md
+│   │   ├── sprints/
+│   │   │   ├── sprint-01/
+│   │   │   │   ├── planning.md
+│   │   │   │   ├── tasks.md
+│   │   │   │   └── retrospective.md
+│   │   │   └── sprint-02/
+│   │   └── backlog.md
+│   │
+│   ├── fixes/
+│   │   ├── RCA-001-database-connection-timeout.md
+│   │   ├── RCA-002-authentication-bypass.md
+│   │   ├── hotfixes/
+│   │   │   └── HF-001-critical-security-patch.md
+│   │   └── RCA-template.md
+│   │
+│   ├── security/
+│   │   ├── threat-models/
+│   │   ├── security-reviews/
+│   │   ├── penetration-tests/
+│   │   └── compliance/
+│   │
+│   └── api/
+│       ├── openapi.yaml
+│       ├── postman-collection.json
+│       └── examples/
+│
+├── .adr/
+│   └── config.yml
+│
+└── README.md (with documentation index)
+
+### 14.2 Architecture Decision Records (ADR)
+
+#### ADR Template (docs/architecture/decisions/ADR-template.md)
+```markdown
+# ADR-[NUMBER]: [TITLE]
+
+## Status
+[Proposed | Accepted | Deprecated | Superseded by ADR-XXX]
+
+## Context
+- **Date**: [YYYY-MM-DD]
+- **Participants**: [List of stakeholders involved]
+- **Problem Statement**: [Clear description of the problem]
+- **Technical Constraints**: [Any limitations or requirements]
+- **Business Constraints**: [Budget, timeline, compliance requirements]
+
+## Decision
+[Clear statement of the decision made]
+
+## Consequences
+
+### Positive
+- [List positive outcomes]
+
+### Negative
+- [List negative outcomes or trade-offs]
+
+### Risks
+- [Identified risks and mitigation strategies]
+
+## Alternatives Considered
+
+### Option 1: [Alternative Name]
+- **Description**: [Brief description]
+- **Pros**: [Advantages]
+- **Cons**: [Disadvantages]
+- **Reason for rejection**: [Why this wasn't chosen]
+
+### Option 2: [Alternative Name]
+[Same structure as Option 1]
+
+## Implementation Notes
+- **Affected Components**: [List of components that need changes]
+- **Migration Strategy**: [If applicable]
+- **Rollback Plan**: [How to revert if needed]
+
+## References
+- [Links to relevant documentation, articles, or discussions]
+
+14.3 Development Flow Documentation
+Flow Documentation Template (docs/development/flows/flow-template.md)
+# [Flow Name] Development Flow
+
+## Overview
+[Brief description of what this flow accomplishes]
+
+## Actors
+- **Primary**: [Main user/system initiating the flow]
+- **Secondary**: [Other participants]
+- **Systems**: [External systems involved]
+
+## Prerequisites
+- [Required conditions before flow can start]
+
+## Flow Diagram
+```mermaid
+graph TD
+    A[Start] --> B{Decision Point}
+    B -->|Yes| C[Process Step]
+    B -->|No| D[Alternative Step]
+    C --> E[End]
+    D --> E
+	
+Detailed Steps
+Step 1: [Step Name]
+
+Action: [What happens]
+Validation: [What's checked]
+Error Handling: [How errors are handled]
+Security Checks: [Authentication/Authorization requirements]
+
+Step 2: [Step Name]
+[Same structure as Step 1]
+Data Flow
+
+Input: [Data entering the flow]
+Transformations: [How data is processed]
+Output: [Data produced]
+
+Error Scenarios
+Error TypeHandling StrategyUser Feedback[Error 1][How handled][Message]
+
+Performance Considerations
+
+Expected Volume: [Transactions/second]
+Latency Requirements: [Max acceptable delay]
+Optimization Points: [Where to focus optimization]
+
+Security Considerations
+
+Authentication: [Required auth levels]
+Authorization: [Permission checks]
+Data Protection: [Encryption, masking requirements]
+
+### 14.4 MVP Documentation
+
+#### MVP Phase Template (docs/mvp/phase-template.md)
+```markdown
+# MVP Phase [NUMBER]: [Phase Name]
+
+## Phase Overview
+- **Start Date**: [YYYY-MM-DD]
+- **Target Completion**: [YYYY-MM-DD]
+- **Phase Goal**: [Primary objective]
+
+## Success Metrics
+- [ ] [Metric 1: Specific, measurable goal]
+- [ ] [Metric 2: Another measurable goal]
+
+## Core Features
+### Feature 1: [Feature Name]
+- **Description**: [What it does]
+- **User Story**: As a [user type], I want [goal] so that [benefit]
+- **Acceptance Criteria**:
+  - [ ] [Specific criterion 1]
+  - [ ] [Specific criterion 2]
+- **Technical Requirements**:
+  - [Requirement 1]
+  - [Requirement 2]
+
+### Feature 2: [Feature Name]
+[Same structure as Feature 1]
+
+## Out of Scope
+- [Feature/functionality explicitly not included]
+- [Another excluded item]
+
+## Dependencies
+- **Technical**: [Required systems, APIs, libraries]
+- **Business**: [Approvals, resources, external factors]
+
+## Risk Assessment
+| Risk | Probability | Impact | Mitigation Strategy |
+|------|-------------|--------|-------------------|
+| [Risk 1] | High/Medium/Low | High/Medium/Low | [Strategy] |
+
+## Technical Architecture
+- **New Components**: [Components being added]
+- **Modified Components**: [Existing components being changed]
+- **Integration Points**: [Where new code connects to existing]
+
+## Testing Strategy
+- **Unit Test Coverage**: [Target percentage]
+- **Integration Tests**: [Key scenarios]
+- **User Acceptance Tests**: [UAT plan]
+
+## Rollout Plan
+- **Feature Flags**: [Which features will be flagged]
+- **Gradual Rollout**: [Percentage-based or geographic strategy]
+- **Rollback Strategy**: [How to revert if issues arise]
+
+14.5 Task Breakdown Documentation
+Epic/Task Breakdown Template (docs/tasks/breakdown/task-template.md)
+
+# Epic: [Epic Name]
+
+## Epic Overview
+- **Epic ID**: [EPIC-XXX]
+- **Business Value**: [Why this matters]
+- **Estimated Effort**: [Story points or time]
+- **Priority**: [Critical/High/Medium/Low]
+
+## User Stories
+
+### Story 1: [Story Title]
+- **Story ID**: [STORY-XXX]
+- **As a**: [User type]
+- **I want**: [Desired functionality]
+- **So that**: [Business value]
+- **Acceptance Criteria**:
+  - [ ] [Criterion 1]
+  - [ ] [Criterion 2]
+
+#### Technical Tasks
+1. **[TASK-001] Backend: [Task Name]**
+   - **Estimate**: [Hours/Points]
+   - **Assignee**: [Developer]
+   - **Details**:
+     - [ ] Implement [specific functionality]
+     - [ ] Add unit tests
+     - [ ] Update documentation
+   - **Dependencies**: [Other tasks that must complete first]
+
+2. **[TASK-002] Frontend: [Task Name]**
+   - **Estimate**: [Hours/Points]
+   - **Details**: [Similar structure]
+
+3. **[TASK-003] Database: [Task Name]**
+   - **Estimate**: [Hours/Points]
+   - **Details**: [Similar structure]
+
+### Story 2: [Story Title]
+[Same structure as Story 1]
+
+## Technical Specifications
+- **API Changes**: [New endpoints or modifications]
+- **Database Changes**: [Schema updates, migrations]
+- **Security Considerations**: [Auth changes, data protection]
+
+## Definition of Done
+- [ ] Code complete and peer reviewed
+- [ ] Unit tests written and passing (>80% coverage)
+- [ ] Integration tests passing
+- [ ] Documentation updated
+- [ ] Security review completed
+- [ ] Performance benchmarks met
+- [ ] Deployed to staging environment
+- [ ] Product owner acceptance
+
+14.6 Root Cause Analysis (RCA) (docs/fixes/RCA-template.md)
+ RCA-[NUMBER]: [Incident Title]
+
+## Incident Summary
+- **Incident ID**: [INC-XXXXX]
+- **Severity**: [Critical/High/Medium/Low]
+- **Date Detected**: [YYYY-MM-DD HH:MM UTC]
+- **Date Resolved**: [YYYY-MM-DD HH:MM UTC]
+- **Duration**: [Total time of impact]
+- **Affected Systems**: [List of impacted components]
+- **Customer Impact**: [Number of users, revenue impact, etc.]
+
+## Timeline
+| Time (UTC) | Event | Action Taken |
+|------------|-------|--------------|
+| HH:MM | [What happened] | [Response] |
+| HH:MM | [Next event] | [Next action] |
+
+## Root Cause
+### Primary Cause
+[Detailed explanation of the fundamental issue]
+
+### Contributing Factors
+1. [Factor 1: e.g., insufficient monitoring]
+2. [Factor 2: e.g., missing validation]
+3. [Factor 3: e.g., inadequate testing]
+
+## Technical Details
+### What Failed
+```code
+// Code snippet showing the problematic code
+
+Why It Failed
+[Technical explanation with relevant logs, metrics, or traces]
+
+Fix Applied
+code// Code snippet showing the corrected code
+
+Impact Analysis
+
+Users Affected: [Number and type]
+Data Impact: [Any data loss or corruption]
+Financial Impact: [Revenue loss, SLA penalties]
+Reputation Impact: [Customer sentiment, press coverage]
+
+Action Items
+ActionOwnerDue DateStatus[Immediate fix deployed][Name][Date]Complete[Add monitoring for X][Name][Date]In Progress[Update runbook][Name][Date]Pending[Add automated tests][Name][Date]Pending
+
+Preventive Measures
+Short-term (< 1 week)
+
+ [Action 1]
+ [Action 2]
+
+Medium-term (< 1 month)
+
+ [Action 1]
+ [Action 2]
+
+Long-term (> 1 month)
+
+ [Strategic improvement 1]
+ [Strategic improvement 2]
+ 
+ Lessons Learned
+
+What went well: [Positive aspects of incident response]
+What could be improved: [Areas for enhancement]
+Knowledge gaps identified: [Training or documentation needs]
+
+References
+
+[Link to incident ticket]
+[Link to monitoring dashboards]
+[Link to relevant documentation]
+
+### 14.7 Documentation Generation Rules
+
+When generating code, ALWAYS include:
+
+1. **Automatic ADR Creation**: For every significant architectural decision
+2. **Flow Documentation**: For every new user journey or system process
+3. **Task Breakdown**: For every feature implementation
+4. **README Updates**: Keep the main README as a living index
+
+### 14.8 Documentation Index (README.md template addition)
+```markdown
+## 📚 Documentation Index
+
+### 🏗️ Architecture
+- [System Overview](docs/architecture/README.md)
+- [Architecture Decisions](docs/architecture/decisions/)
+- [Security Architecture](docs/security/)
+
+### 💻 Development
+- [Getting Started](docs/development/setup/local-development.md)
+- [Development Flows](docs/development/flows/)
+- [Coding Standards](docs/development/conventions/coding-standards.md)
+
+### 📋 Project Planning
+- [MVP Roadmap](docs/mvp/roadmap.md)
+- [Current Sprint](docs/tasks/sprints/)
+- [Task Breakdown](docs/tasks/breakdown/)
+
+### 🔧 Operations
+- [Deployment Guide](docs/development/setup/deployment-guide.md)
+- [Incident Reports](docs/fixes/)
+- [Monitoring & Alerts](docs/operations/monitoring.md)
+
+### 🔍 Quick Links
+- **Latest ADR**: [ADR-XXX](docs/architecture/decisions/ADR-XXX.md)
+- **Current MVP Phase**: [Phase X](docs/mvp/phase-X/)
+- **Recent RCAs**: [RCA Index](docs/fixes/)
+
+### 📊 Metrics
+- **Documentation Coverage**: XX%
+- **ADRs This Quarter**: XX
+- **Resolved Incidents**: XX
+
+14.9 Automated Documentation Hints
+When generating code, include these documentation reminders:
+
+// TODO: Document this decision in ADR-XXX
+// FLOW: This implements step 3 of user-authentication-flow.md
+// TASK: Implements TASK-123 from epic-001-user-management.md
+// SECURITY: See threat-model-auth.md for security considerations
+
 **Remember**: 
+
 1. **Security is not optional—it must be built into every aspect of the solution**
 2. **Always identify project type: Greenfield (modern approach) vs Legacy (compatibility-first)**
 3. **For existing projects: NO configuration files = NO code generation**
@@ -627,3 +1052,13 @@ Act as a senior architect reviewing your own work:
 8. **Apply Defense-in-Depth and Zero Trust principles consistently**
 9. **ENFORCE configuration file review for any existing/legacy project integration**
 10. **For Greenfield projects: leverage latest technologies and best practices**
+11. **ALWAYS create corresponding documentation**: Every code generation MUST include:
+    - ADR for architectural decisions
+    - Flow documentation for new processes
+    - Task breakdown with epic/story/task hierarchy
+    - RCA template for any fixes or patches
+    - Updated README.md with documentation index
+12. **Maintain documentation structure**: Follow the standardized `/docs` folder hierarchy
+13. **Link code to documentation**: Include TODO comments referencing relevant ADRs, flows, and tasks
+14. **Document security decisions**: Every security choice must be recorded in both ADRs and threat models
+15. **Keep documentation living**: Update existing docs when code changes, never let them become stale
